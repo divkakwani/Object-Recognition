@@ -36,7 +36,7 @@ class MyImage(object):
         if self._mode == 'g':
             plt.gray()                  # restricts the colors to graylevel
         plt.imshow(self._pixel_table)   # draws the image on canvas
-        
+
     def show_hist(self):
         """
             Displays the histogram of the image
@@ -67,11 +67,11 @@ class MyImage(object):
         return MyImage('Denoised', 'g', filters.median_filter(self._pixel_table, 5))
 
     def x_gradient(self):
-        
+
         mask = array([ [-1, -1, -1],
                        [ 0,  0,  0],            # Prewitt Operator
                        [ 1,  1,  1] ])
-        
+
         convolved_img = MyImage('gx', 'g', filters.convolve(self._pixel_table, mask))
         return convolved_img
 
@@ -80,14 +80,14 @@ class MyImage(object):
         mask = array([ [-1, 0, 1],
                        [-1, 0, 1],              # Prewitt Operator
                        [-1, 0, 1] ])
- 
 
-        
+
+
         convolved_img = MyImage('gx', 'g', filters.convolve(self._pixel_table, mask))
         return convolved_img
 
     def edge_detect(self):
-        
+
         mag = self.x_gradient()._pixel_table + self.y_gradient()._pixel_table
 
         # Thresholding
@@ -99,9 +99,9 @@ class MyImage(object):
                 else:
                     mag[row][col] = 0
         return MyImage('edge', 'g' , mag)
-    
+
     def laplacian(self):
-        
+
         assert self._mode == 'g'
         mask = array([ [0,  1, 0],
                        [1, -4, 1],
