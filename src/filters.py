@@ -26,6 +26,3 @@ avg = array([[ 0  ,  1/5,  0  ],
              [ 0  ,  1/5,  0  ]])
                 
 
-      
-def f_convolve(kernel):
-    return lambda array : convolve(array, kernel)
